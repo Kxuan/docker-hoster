@@ -110,11 +110,14 @@ def update_hosts_file():
     for i,line in enumerate(lines):
         if line==enclosing_pattern:
             lines = lines[:i]
-            break;
+            break
 
     #remove all the trailing newlines on the line list
-    if lines:
-        while lines[-1].strip()=="": lines.pop()
+    while lines:
+        if lines[-1].strip() == "":
+            lines.pop()
+        else:
+            break
 
     #append all the domain lines
     if len(hosts)>0:
