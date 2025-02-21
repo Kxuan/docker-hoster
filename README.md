@@ -1,3 +1,8 @@
+# What changed in this fork
+* Add a environment variable `DOCKER_HOSTER_DOMAIN_SUFFIX` which can be used to append custom suffix to all host names
+* Replace using container `Alias` with its `DNSNames`
+* using official python image
+
 # Hoster
 
 A simple "etc/hosts" file injection tool to resolve names of local Docker containers on the host.
@@ -7,6 +12,7 @@ hoster is intended to run in a Docker container:
     docker run -d \
         -v /var/run/docker.sock:/tmp/docker.sock \
         -v /etc/hosts:/tmp/hosts \
+        -e DOCKER_HOSTER_DOMAIN_SUFFIX=.docker \
         dvdarias/docker-hoster
 
 The `docker.sock` is mounted to allow hoster to listen for Docker events and automatically register containers IP.
