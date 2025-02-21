@@ -122,7 +122,10 @@ def update_hosts_file():
         
         for id, addresses in hosts.items():
             for addr in addresses:
-                lines.append("%s    %s\n"%(addr["ip"],"   ".join(addr["domains"])))
+                domains = addr["domains"]
+                if os.environ.get("DOCKER_HOSTER_DOMAIN_SUFFIX"):
+                    domains = [d + os.environ.get("DOCKER_HOSTER_DOMAIN_SUFFIX") for d in domains]
+                lines.append("%s    %s\n"%(addr["ip"],"   ".join(domains)))
         
         lines.append("#-----Do-not-add-hosts-after-this-line-----\n\n")
 
