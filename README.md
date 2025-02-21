@@ -10,10 +10,11 @@ A simple "etc/hosts" file injection tool to resolve names of local Docker contai
 hoster is intended to run in a Docker container:
 
     docker run -d \
+        --name docker-hoster \
         -v /var/run/docker.sock:/tmp/docker.sock \
         -v /etc/hosts:/tmp/hosts \
         -e DOCKER_HOSTER_DOMAIN_SUFFIX=.docker \
-        dvdarias/docker-hoster
+        ixuan/docker-hoster:latest
 
 The `docker.sock` is mounted to allow hoster to listen for Docker events and automatically register containers IP.
 
